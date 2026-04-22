@@ -1,29 +1,23 @@
 Google Cloud **Kubernetes Engine (GKE)** lets you run containerized apps across multiple machines without manually managing the infrastructure. Under the hood it uses **Kubernetes** an open source system that takes care of where your containers run, restarts them when they crash, and scales them when traffic grows.
 
-#### Two types of machines in every cluster
 
-- **Master (Control Plane)** decides where to run your containers, watches the cluster state, reacts to failures. Google manages this for you, you never touch it.
-- **Nodes** regular VMs (Compute Engine) where your containers actually run. You pay for these.
+- **`kubectl`** manages what runs *inside* the cluster (Pods, Deployments, Services).
 
+kubectl talks to the **Kubernetes API** running on the master. It knows where to send requests because `gcloud container clusters get-credentials` saves the cluster address and auth token to `~/.kube/config`, after that every `kubectl` command just works. 
 
----
-
-### Environment Setup
-
-```bash
-gcloud config set compute/region REGION
-gcloud config set compute/zone ZONE
-```
 
 ---
-
 ### Create a GKE Cluster
+
+A cluster consists of at least one **master machine** and multiple **worker nodes** (Compute Engine VM instances).
 
 > Cluster names must start with a letter, end with an alphanumeric, and cannot exceed 40 characters.
 
 ```bash
 gcloud container clusters create --machine-type=e2-medium --zone=ZONE lab-cluster
 ```
+
+Expected output:
 
 ```
 NAME: lab-cluster
@@ -49,7 +43,7 @@ This writes a `kubeconfig` entry so `kubectl` knows how to talk to your cluster.
 
 ### Deploy an Application
 
-**Create a Deployment** — Kubernetes pulls the image and starts running it on your nodes:
+Create a Deployment from a container image:
 
 ```bash
 kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
