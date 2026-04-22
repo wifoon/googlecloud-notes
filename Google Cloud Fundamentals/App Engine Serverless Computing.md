@@ -28,4 +28,22 @@ and we check the effect in the browser after changing port to 5000.
 flask --app main run
 ```
 
-![[Pasted image 20260422174919.png]]
+#### App Deployment
+
+App Engine is managed using the `gcloud app` commands.
+
+```bash
+# Enabling App Engine Admin API
+gcloud services enable appengine.googleapis.com
+```
+
+and finally deploying the application based on the **app.yaml** file.
+
+```bash
+gcloud app deploy
+
+# Opening the deployed app
+gcloud app browse
+```
+
+![[Pasted image 20260422175301.png]]
