@@ -1,11 +1,10 @@
-Google Cloud **Kubernetes Engine (GKE)** is a managed environment for deploying, managing, and scaling containerized applications using Google infrastructure. GKE clusters are powered by the **Kubernetes** open source cluster management system.
+Google Cloud **Kubernetes Engine (GKE)** lets you run containerized apps across multiple machines without manually managing the infrastructure. Under the hood it uses **Kubernetes** an open source system that takes care of where your containers run, restarts them when they crash, and scales them when traffic grows.
 
-Key platform benefits:
 
-- Load balancing for Compute Engine instances
-- Automatic scaling and automatic node software upgrades
-- Node auto-repair to maintain node health and availability
-- Logging and monitoring with Cloud Monitoring
+- **`kubectl`** manages what runs *inside* the cluster (Pods, Deployments, Services).
+
+kubectl talks to the **Kubernetes API** running on the master. It knows where to send requests because `gcloud container clusters get-credentials` saves the cluster address and auth token to `~/.kube/config`, after that every `kubectl` command just works. 
+
 
 ---
 ### Create a GKE Cluster
@@ -32,42 +31,31 @@ STATUS: RUNNING
 
 ### Authenticate with the Cluster
 
-After creation, obtain authentication credentials to interact with the cluster:
+Before you can run `kubectl` commands you need to point it at your cluster:
 
 ```bash
 gcloud container clusters get-credentials lab-cluster
 ```
 
-This generates a `kubeconfig` entry for the cluster, enabling `kubectl` commands.
+This writes a `kubeconfig` entry so `kubectl` knows how to talk to your cluster.
 
 ---
 
 ### Deploy an Application
 
-GKE uses **Kubernetes objects** to manage cluster resources:
-
-- **Deployment** — manages stateless applications (e.g. web servers)
-- **Service** — defines access rules and load balancing for external traffic
-
-**Create a Deployment** from a container image:
+Create a Deployment from a container image:
 
 ```bash
 kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
 ```
 
-- `--image` specifies the container image to deploy
-- If no version tag is given, the latest version is pulled
-
-**Expose the Deployment** as a Kubernetes Service with a load balancer:
+Expose the Deployment as a Kubernetes Service it creates a public IP and a load balancer in front of your Pods:
 
 ```bash
 kubectl expose deployment hello-server --type=LoadBalancer --port 8080
 ```
 
-- `--port` — the port the container exposes
-- `--type=LoadBalancer` — provisions a Compute Engine load balancer
-
-**Verify the Service** and retrieve the external IP:
+Check the Service to get the external IP:
 
 ```bash
 kubectl get service
@@ -78,22 +66,14 @@ NAME           TYPE          CLUSTER-IP     EXTERNAL-IP    PORT(S)          AGE
 hello-server   LoadBalancer  10.39.244.36   35.202.234.26  8080:31991/TCP   65s
 ```
 
-> It may take a minute for the `EXTERNAL-IP` to be assigned. Re-run the command if it shows `pending`.
-
-The application is then accessible in the browser at:
-
-```
-http://[EXTERNAL-IP]:8080
-```
+App is live at `http://[EXTERNAL-IP]:8080`.
 
 ---
 
 ### Delete the Cluster
 
-To avoid ongoing charges, delete the cluster when finished:
-
 ```bash
 gcloud container clusters delete lab-cluster
 ```
 
-Confirm with `Y` when prompted. Deletion may take a few minutes.
+Confirm with `Y`. Takes a few minutes.
