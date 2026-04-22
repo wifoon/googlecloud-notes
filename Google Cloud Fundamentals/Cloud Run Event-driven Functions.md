@@ -73,6 +73,7 @@ Install packages:
 npm install
 ```
 
+---
 
 ### Deploying Function
 
@@ -105,11 +106,12 @@ gcloud functions deploy nodejs-pubsub-function \
 Now we can verify the deployment by following command
 
 ```bash
-gcloud functions describe nodejs-pubsub-function \
-  --region=REGION
+gcloud functions describe nodejs-pubsub-function --region=REGION
 ```
 
 If status shows `ACTIVE` the deployment succeeded.
+
+---
 
 ### Testing Function
 
@@ -119,4 +121,18 @@ I tested the function by sending a Pub/Sub message:
 gcloud pubsub topics publish cf-demo --message="Cloud Function Gen2"
 ```
 
-Let's check the logs to see if we succeeded
+
+Let's check the logs to see if we succeeded:
+
+```bash
+gcloud functions logs read nodejs-pubsub-function --region=REGION 
+```
+
+```bash
+LEVEL: 
+NAME: nodejs-pubsub-function
+EXECUTION_ID: h4v6akxf4sxt
+TIME_UTC: 2024-08-05 15:15:25.723
+LOG: Hello, Cloud Function Gen2!
+```
+
