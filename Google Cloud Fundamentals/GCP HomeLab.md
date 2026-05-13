@@ -35,3 +35,5 @@ aby sprawdzic czy wszystkie api zostaly wlaczone
 gcloud services list --enabled
 
 
+dodanie providera i stworzenie vpc w terraform
+
