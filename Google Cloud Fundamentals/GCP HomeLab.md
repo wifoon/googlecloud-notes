@@ -59,3 +59,10 @@ w regułach firewall dodano SSH port 22 dla zakresu adresów usług google IAP o
 
 dodanie pliku iam.tf do utworzenia konta dla VM z web serverem do publikacji pub/sub i dla cloud run function z wysyłaniem email. Ogranicza to dostęp do wszystkich funkcji, oprócz tych dozwolonych, do poprawnego działania projektu.
 
+utworzenie pliku messaging.tf z Topic dla pub/sub oraz secrets.tf który jest pustym uchwytem dla klucza api dla sendgrid, który będzie ukryty w secret manager google.
+pub/sub dla formularza na stronie www jest po to, aby po wyslaniu formularza wiadomosc zostala zakolejkowana do przetworzenia przez funkcje.
+
+aby potwierdzic utworzenie topicu dla pubsub
+
+gcloud pubsub topics list
+
