@@ -49,3 +49,7 @@ terraform apply
 sprawdzenie czy siec main-vpc poprawnie sie utworzyla
 
 gcloud compute networks list
+
+utworzenie podsieci o adresie 10.0.1.0 z maską /24 w pliku subnets.tf.
+do pliku subnets.tf dodaję również Cloud Router i NAT aby maszyny mogły pobrać np. nginx czy python mimo braku publicznego ip.
+
