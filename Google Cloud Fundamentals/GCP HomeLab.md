@@ -55,6 +55,8 @@ do pliku subnets.tf dodaję również Cloud Router i NAT aby maszyny mogły pobr
 
 maszyna z webserver nie bedzie miala publicznego ip, aby zminimalizować pole do ataków. Komunikacja ze strona www bedzie odbywala sie przez loadbalancer, który już ma publiczne IP i umozliwi dostep do strony, ale zablokuje mozliwosc laczenia sie do maszyny przez ssh. do konfiguracji maszyny uzywany bedzie Identity-Aware Proxy (IAP), czyli tunelowanie SSH przy pomocy serwerów google.
 
+IAP wie ze mam dostep poprzez konto google i uprawnienia IAM. gcloud tworzy pare kluczy public i private, przy próbie połączenia sie przez tunelowane SSH. jesli mam uprawnienia, to IAP łączy sie z maszyna przez port 22 wewnątrz sieci VPC i jest on pośrednikiem.
+
 w regułach firewall dodano SSH port 22 dla zakresu adresów usług google IAP oraz port 80 http dla adresów loadbalancera i health check. 
 
 dodanie pliku iam.tf do utworzenia konta dla VM z web serverem do publikacji pub/sub i dla cloud run function z wysyłaniem email. Ogranicza to dostęp do wszystkich funkcji, oprócz tych dozwolonych, do poprawnego działania projektu.
