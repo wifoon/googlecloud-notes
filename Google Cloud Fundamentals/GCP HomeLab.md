@@ -1,6 +1,6 @@
 pobranie i zalogowanie sie do cli i utworzenie na dysku pliku z poświadczeniami dla terraform
 
-gcloud auth login
+gcloud auth application-default login
 
 
 utworzenie projektu
@@ -37,3 +37,15 @@ gcloud services list --enabled
 
 dodanie providera i stworzenie vpc w terraform
 
+po utworzeniu plików main.tf i vpc.tf sprawdzam polaczenie
+
+terraform init
+terraform plan
+
+zatwierdzenie zmian i wyslanie zapytania do privdera, czyli utworzenie vpc
+
+terraform apply
+
+sprawdzenie czy siec main-vpc poprawnie sie utworzyla
+
+gcloud compute networks list
