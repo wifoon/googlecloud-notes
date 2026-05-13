@@ -66,4 +66,12 @@ aby potwierdzic utworzenie topicu dla pubsub
 
 gcloud pubsub topics list
 
-utworzenie VM e2-micro, wystarczajaca na potrzeby projektu, z metadanymi startup, które definują co zrobić na maszynie, akurat tutaj pobranie serwera nginx do zhostowania strony html.
+utworzenie VM e2-micro, wystarczajaca na potrzeby projektu, z metadanymi startup, które definują pobranie serwera nginx do zhostowania strony html.
+
+po utworzeniu maszyny i odpaleniu startup z metadata service, nginx jest zainstalowany ze strona html. Mozna ją podejrzec łącząc się z VM przez tunelowanie ssh przez Identity-Aware Proxy (IAP)
+
+gcloud compute ssh web-server --zone=europe-west1-b --tunnel-through-iap
+
+mozna podejrzec strone html poprzez
+
+curl http://localhost
