@@ -57,5 +57,5 @@ maszyna ze strona nie bedzie miala publicznego ip, aby zminimalizować pole do a
 
 w regułach firewall dodano SSH port 22 dla zakresu adresów usług google IAP oraz port 80 http dla adresów loadbalancera i health check. 
 
-dodanie pliku iam.tf do utworzenia konta dla VM z web serverem i dla cloud run function z wysyłaniem email. Ogranicza to dostęp do wszystkich funkcji, oprócz tych dozwolonych, do poprawnego działania projektu.
+dodanie pliku iam.tf do utworzenia konta dla VM z web serverem do publikacji pub/sub i dla cloud run function z wysyłaniem email. Ogranicza to dostęp do wszystkich funkcji, oprócz tych dozwolonych, do poprawnego działania projektu.
 
