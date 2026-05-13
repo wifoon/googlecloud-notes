@@ -28,3 +28,10 @@ gcloud services enable run.googleapis.com  // dla funkcji i kodu serverless
 gcloud services enable secretmanager.googleapis.com // schowek na klucze API
 gcloud services enable cloudbuild.googleapis.com // silnik do budowania infrastruktury z kodu
 gcloud services enable iam.googleapis.com // zarzadzanie tozsamosciami i uprawnieniami
+
+
+aby sprawdzic czy wszystkie api zostaly wlaczone
+
+gcloud services list --enabled
+
+
