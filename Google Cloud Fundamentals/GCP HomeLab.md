@@ -54,3 +54,5 @@ utworzenie podsieci o adresie 10.0.1.0 z maską /24 w pliku subnets.tf.
 do pliku subnets.tf dodaję również Cloud Router i NAT aby maszyny mogły pobrać np. nginx czy python mimo braku publicznego ip.
 
 maszyna ze strona nie bedzie miala publicznego ip, aby zminimalizować pole do ataków. Komunikacja ze strona www bedzie odbywala sie przez loadbalancer, który już ma publiczne IP i umozliwi dostep do strony, ale zablokuje mozliwosc laczenia sie do maszyny przez ssh. do konfiguracji maszyny uzywany bedzie Identity-Aware Proxy (IAP), czyli tunelowanie SSH przy pomocy serwerów google.
+
+w regułach firewall dodano SSH port 22 dla zakresu adresów usług google IAP oraz port 80 http dla adresów loadbalancera i 
