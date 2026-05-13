@@ -66,7 +66,7 @@ aby potwierdzic utworzenie topicu dla pubsub
 
 gcloud pubsub topics list
 
-utworzenie VM e2-micro, wystarczajaca na potrzeby projektu, z metadanymi startup, które definują pobranie serwera nginx do zhostowania strony html.
+utworzenie VM e2-micro, wystarczajaca na potrzeby projektu, z metadanymi startup, które definują pobranie serwera nginx do zhostowania strony html. 
 
 po utworzeniu maszyny i odpaleniu startup z metadata service, nginx jest zainstalowany ze strona html. Mozna ją podejrzec łącząc się z VM przez tunelowanie ssh przez Identity-Aware Proxy (IAP), musimy to tak zrobić ponieważ web server nie ma publicznego adresu ip, aby ograniczyć pole do ataków.
 
@@ -76,4 +76,4 @@ mozna podejrzec strone html poprzez
 
 curl http://localhost
 
-teraz dodam aplikacje python, która za pomocą serwera flask nasłuchuje na porcie 5000, jeśli przyjdzie zapytanie typu POST z /api/submit z formularza, to wyciąga dane z request.form, pakuje do formatu json i przekazuje je do publishera pubsub.
+teraz dodam aplikacje python, która za pomocą serwera flask nasłuchuje na porcie 5000, jeśli przyjdzie zapytanie typu POST na endpoint /api/submit z formularza, to wyciąga dane z request.form, pakuje do formatu json i przekazuje je do publishera pubsub.
