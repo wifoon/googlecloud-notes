@@ -78,7 +78,7 @@ mozna podejrzec strone html poprzez
 
 curl http://localhost
 
-teraz dodam aplikacje python, która za pomocą serwera flask nasłuchuje na porcie 5000, jeśli przyjdzie zapytanie typu POST na endpoint /api/submit z formularza, to wyciąga dane z request.form, pakuje do formatu json i przekazuje je do publishera pubsub.
+teraz dodam aplikacje python, która za pomocą serwera flask nasłuchuje na porcie 5000, jeśli przyjdzie zapytanie typu POST na endpoint /api/submit z formularza, to wyciąga dane z request.form, pakuje do formatu json i przekazuje je do publishera pubsub. aplikacja python ma dostęp do usługi pubsub przez service account dodane do VM.
 
 aby sprawdzic komunikacje frontend backend wysyłam zapytanie do serwera
 
