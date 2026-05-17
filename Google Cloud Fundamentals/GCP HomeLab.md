@@ -84,4 +84,4 @@ aby sprawdzic komunikacje frontend backend wysyłam zapytanie do serwera
 
 curl -X POST -d "email=test@email.com&message=test" http://localhost/api/submit
 
-aplikacje python wrzucam do systemd, aby nie była jako zwykły proces, tylko usługa.
+aplikacje python wrzucam do systemd, aby nie była jako zwykły proces, tylko usługa, która jest automatycznie zarządzana przez system i restartowana w razie awarii.
