@@ -97,4 +97,4 @@ Zaczynam od utworzenia funkcji w python, która odkodowuje base64 i odbiera wiad
 Po wysłaniu zapytania POST do serwera, w logach Cloud Run Function wyświetla się email i wiadomość.
 
 
-
+gcloud services enable firestore.googleapis.com 
