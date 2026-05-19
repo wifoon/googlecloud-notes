@@ -88,7 +88,11 @@ aplikacje python wrzucam do systemd, aby nie była jako zwykły proces, tylko us
 
 wiadomość znalazła się w subskrypcji Pub/Sub utworzonego tematu, więc teraz mogę dodać Cloud Run Function.
 
-Zaczynam od utworzenia funkcji w python, która odkodowuje base64 odbierać wiadomość z pub/sub i wypisywać ją w logach. main.py pakuję do zip, a następnie tworze bucket w Cloud Storage, gdzie wrzucam jako obiekt spakowaną funkcję. Tworzę cloud run function, podpinam niej obiekt z bucketa, event triggerem ustawiam na topic.publish i runtime python310.
+przez utworzeniem funkcji, musiałem włączyć api dla nowej wersji cloud run functions
+
+gcloud services enable eventarc.googleapis.com
+
+Zaczynam od utworzenia funkcji w python, która odkodowuje base64 i odbiera wiadomość z pub/sub i wypisuje ją w logach. main.py pakuję do zip, a następnie tworze bucket w Cloud Storage, gdzie wrzucam jako obiekt spakowaną funkcję. Tworzę cloud run function, podpinam niej obiekt z bucketa, event triggerem ustawiam na messagePublished i runtime python310.
 
 Po wysłaniu zapytania POST do serwera, w logach Cloud Run Function wyświetla się email i wiadomość.
 
