@@ -96,10 +96,12 @@ Zaczynam od utworzenia funkcji w python, która odkodowuje base64 i odbiera wiad
 
 Po wysłaniu zapytania POST do serwera, w logach Cloud Run Function wyświetla się email i wiadomość.
 
-Zmieniam funkcję na zapisywanie zgłoszeń do bazy serverless firestore w trybie native, zamiast po prostu wypisywanie w logach.
+Zmieniam funkcję na zapisywanie zgłoszeń do bazy serverless firestore w trybie native, zamiast zwykłe wypisywanie w logach.
 
 gcloud services enable firestore.googleapis.com 
 
 Zacząłem od utworzenia bazy danych w firestore.tf i konta serwisowego dla funkcji iam.tf, aby funkcja nie miała ogólnych uprawnień administratora, tylko potrzebne do zarządzania roles/datastore.user. 
 
-Nastepnie zmodyfikowałem funkcję 
+Inicjalizacja klienta firestore odbywa się poza główną funkcją, na samym początku programu, aby odbyło się to raz, a nie za każdym razem gdy funkcja jest wywoływana.
+Nastepnie zmodyfikowałem funkcję w python, aby utworzyła kolekcję form_submissions, a w niej za każdym razem gdy otrzyma wiadomość z pub/sub tworzy dokument z danymi.
+
