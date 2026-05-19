@@ -85,3 +85,12 @@ aby sprawdzic komunikacje frontend backend wysyłam zapytanie do serwera
 curl -X POST -d "email=test@email.com&message=test" http://localhost/api/submit
 
 aplikacje python wrzucam do systemd, aby nie była jako zwykły proces, tylko usługa, która jest automatycznie zarządzana przez system i restartowana w razie awarii.
+
+wiadomość znalazła się w subskrypcji Pub/Sub utworzonego tematu, więc teraz mogę dodać Cloud Run Function.
+
+Zaczynam od utworzenia funkcji w python, która odkodowuje base64 odbierać wiadomość z pub/sub i wypisywać ją w logach. main.py pakuję do zip, a następnie tworze bucket w Cloud Storage, gdzie wrzucam jako obiekt spakowaną funkcję. Tworzę cloud run function, podpinam niej obiekt z bucketa, event triggerem ustawiam na topic.publish i runtime python310.
+
+Po wysłaniu zapytania POST do serwera, w logach Cloud Run Function wyświetla się email i wiadomość.
+
+
+
