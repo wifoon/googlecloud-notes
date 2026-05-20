@@ -115,4 +115,4 @@ Url map decyduje do którego serwisu w backend kierować ruch. Mam tylko jedną 
 
 Następnie użyłem target HTTP proxy zamiast https, aby na cel projektu konfiguracja była łatwiejsza. Otrzymuje on czysty ruch HTTP z formularza i przekazuje do url map.
 
-Forwarding rule rezerwuje publiczny adres IP i nasłuchuje ruch na porcie 20, który przekazuje do http proxy.
+Na koniec zasób forwarding rule rezerwuje publiczny adres IP i wystawia go na świat. Nasłuchuje ruch na porcie 80, który przekazuje do http proxy, a on uruchamia pozostałe komponenty load balancera.
