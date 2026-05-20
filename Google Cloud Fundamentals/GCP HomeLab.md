@@ -111,4 +111,8 @@ W pierwszej kolejności, tworzę grupę do której dodaję instancję, ponieważ
 
 Głównym zasobem zarządzającym jest backend service, do którego podpinam health check i grupę z instancją. 
 
-Tworzę url map, do którego podpinam backend service.
+Url map decyduje do którego serwisu w backend kierować ruch. Mam tylko jedną maszynę, więc default_service to cały backend service.
+
+Następnie użyłem target HTTP proxy zamiast https, aby na cel projektu konfiguracja była łatwiejsza. Otrzymuje on czysty ruch HTTP z formularza i przekazuje do url map.
+
+Forwarding rule rezerwuje publiczny adres IP i nasłuchuje ruch na porcie 20, który przekazuje do http proxy.
