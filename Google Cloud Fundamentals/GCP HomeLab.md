@@ -1,5 +1,6 @@
 
-Celem projektu było zaprojektowanie i wdrożenie w pełni funkcjonalnej, bezpiecznej i skalowalnej aplikacji webowej w środowisku Google Cloud Platform (GCP). Projekt stanowi kompleksowe środowisko demonstracyjne (HomeLab), obrazujące praktyczne wykorzystanie nowoczesnych wzorców architektury chmurowej, takich jak infrastruktura jako kod (IaC), architektura bezserwerowa (Serverless), podejście Zero Trust oraz komunikacja sterowana zdarzeniami (Event-Driven).
+Celem projektu było zaprojektowanie i wdrożenie w pełni funkcjonalnej, bezpiecznej i skalowalnej aplikacji webowej w środowisku Google Cloud Platform. Projekt stanowi kompleksowe środowisko Home Lab, obrazujące praktyczne wykorzystanie nowoczesnych wzorców architektury chmurowej, takich jak infrastruktura jako kod (IaC), architektura bezserwerowa (Serverless), podejście Zero Trust oraz komunikacja sterowana zdarzeniami (Event-Driven).
+
 pobranie i zalogowanie sie do cli i utworzenie na dysku pliku z poświadczeniami dla terraform
 
 gcloud auth application-default login
@@ -109,12 +110,14 @@ Nastepnie zmodyfikowałem funkcję w python, aby utworzyła kolekcję form_submi
 
 Maszyna wirtualna z web serwerem nie ma publicznego adresu IP, więc dodam Load Balancer loadbalancer.tf z publicznym IP działający jako reverse proxy, aby dało się dostać do formularza.
 
+użyłem http zamiast https ze względu na brak własnej domeny. W sieci VPC ruch również działa na http
+
 W pierwszej kolejności, tworzę grupę do której dodaję instancję, ponieważ load balancer działa na grupach instancji. Tworzę health check sprawdzający stan maszyny z serwerem.
 
 Głównym zasobem zarządzającym jest backend service, do którego podpinam health check i grupę z instancją. 
 
 Url map decyduje do którego serwisu w backend kierować ruch. Mam tylko jedną maszynę, więc default_service to cały backend service.
 
-Następnie użyłem target HTTP proxy zamiast https, aby na cel projektu konfiguracja była łatwiejsza. Otrzymuje on czysty ruch HTTP z formularza i przekazuje do url map.
+Następnie użyłem target HTTP proxy, otrzymuje on czysty ruch HTTP z formularza i przekazuje do url map.
 
 Na koniec zasób forwarding rule rezerwuje publiczny adres IP i wystawia go na świat. Nasłuchuje ruch na porcie 80, który przekazuje do http proxy, a on uruchamia pozostałe komponenty load balancera.
