@@ -1,3 +1,5 @@
+
+Celem projektu było zaprojektowanie i wdrożenie w pełni funkcjonalnej, bezpiecznej i skalowalnej aplikacji webowej w środowisku Google Cloud Platform (GCP). Projekt stanowi kompleksowe środowisko demonstracyjne (HomeLab), obrazujące praktyczne wykorzystanie nowoczesnych wzorców architektury chmurowej, takich jak infrastruktura jako kod (IaC), architektura bezserwerowa (Serverless), podejście Zero Trust oraz komunikacja sterowana zdarzeniami (Event-Driven).
 pobranie i zalogowanie sie do cli i utworzenie na dysku pliku z poświadczeniami dla terraform
 
 gcloud auth application-default login
