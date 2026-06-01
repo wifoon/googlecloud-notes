@@ -105,7 +105,7 @@ Zacząłem od utworzenia bazy danych w firestore.tf i konta serwisowego dla funk
 Inicjalizacja klienta firestore odbywa się poza główną funkcją, na samym początku programu, aby odbyło się to raz, a nie za każdym razem gdy funkcja jest wywoływana.
 Nastepnie zmodyfikowałem funkcję w python, aby utworzyła kolekcję form_submissions, a w niej za każdym razem gdy otrzyma wiadomość z pub/sub tworzy dokument z danymi.
 
-Maszyna wirtualna z web serwerem nie ma publicznego adresu IP, więc dodam Load Balancer loadbalancer.tf z publicznym IP, aby dało się dostać do formularza.
+Maszyna wirtualna z web serwerem nie ma publicznego adresu IP, więc dodam Load Balancer loadbalancer.tf z publicznym IP działający jako reverse proxy, aby dało się dostać do formularza.
 
 W pierwszej kolejności, tworzę grupę do której dodaję instancję, ponieważ load balancer działa na grupach instancji. Tworzę health check sprawdzający stan maszyny z serwerem.
 
