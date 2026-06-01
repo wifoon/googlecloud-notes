@@ -1,6 +1,12 @@
 
 Celem projektu było zaprojektowanie i wdrożenie w pełni funkcjonalnej, bezpiecznej i skalowalnej aplikacji webowej w środowisku Google Cloud Platform. Projekt stanowi kompleksowe środowisko Home Lab, obrazujące praktyczne wykorzystanie nowoczesnych wzorców architektury chmurowej, takich jak infrastruktura jako kod (IaC), architektura bezserwerowa (Serverless), podejście Zero Trust oraz komunikacja sterowana zdarzeniami (Event-Driven).
 
+### **Kluczowe założenia projektu:** 
+* **Infrastructure as Code (IaC):** Całość środowiska (od sieci VPC po bazę danych) zarządzana jest za pomocą narzędzia Terraform.
+* **Security & Zero Trust:** Maszyna wirtualna nie posiada publicznego adresu IP. Ruch z zewnątrz kontrolowany jest przez globalny Load Balancer, a dostęp administracyjny (SSH) realizowany jest wyłącznie przez bezpieczny tunel Identity-Aware Proxy (IAP). Wdrożono również zasadę najmniejszych uprawnień (Least Privilege) poprzez dedykowane konta usług (Service Accounts) bez zapisanych na stałe kluczy. 
+* **Event-Driven Architecture:** Rozdzielenie warstwy przyjmującej zgłoszenia od warstwy przetwarzającej. Frontend i backend natychmiast zwracają odpowiedź użytkownikowi, podczas gdy dane są bezpiecznie kolejkowane w magistrali Pub/Sub i asynchronicznie przetwarzane.
+* **Serverless Data Layer:** Zapis danych zrealizowany za pomocą usług w pełni zarządzanych (Cloud Run Functions oraz Firestore), co eliminuje konieczność utrzymywania serwerów bazodanowych i gwarantuje automatyczne skalowanie.
+
 pobranie i zalogowanie sie do cli i utworzenie na dysku pliku z poświadczeniami dla terraform
 
 gcloud auth application-default login
@@ -110,7 +116,7 @@ Nastepnie zmodyfikowałem funkcję w python, aby utworzyła kolekcję form_submi
 
 Maszyna wirtualna z web serwerem nie ma publicznego adresu IP, więc dodam Load Balancer loadbalancer.tf z publicznym IP działający jako reverse proxy, aby dało się dostać do formularza.
 
-użyłem http zamiast https ze względu na brak własnej domeny. W sieci VPC ruch również działa na http
+użyłem http zamiast https ze względu na brak własnej domeny niezbędnej dla certyfikatu SSL. Ruch w sieci VPC do serwera również działa po http, aby odciążyć maszynę od obliczeń związanych z szyfrowaniem, a infrastruktura google domyślnie szyfruje cały ruch wewnętrzny na poziomie sprzętowym.
 
 W pierwszej kolejności, tworzę grupę do której dodaję instancję, ponieważ load balancer działa na grupach instancji. Tworzę health check sprawdzający stan maszyny z serwerem.
 
